@@ -1,0 +1,15 @@
+
+
+<nav class="flexbox mt-30">
+    {% if posts.has_previous %}
+    <a href="?page={{posts.previous_page_number}}" class="btn btn-white"><i class="ti-arrow-left fs-9 mr-4"></i>Previous</a>
+    {% else %}
+    <a href="#" class="btn btn-white disabled"><i class="ti-arrow-left fs-9 mr-4"></i>Previous</a>
+    {% endif %}
+
+    {% if posts.has_next %}
+    <a href="?page={{posts.next_page_number}}" class="btn btn-white"><i class="ti-arrow-right fs-9 mr-4"></i>Next</a>
+    {% else %}
+    <a href="#" class="btn btn-white disabled"><i class="ti-arrow-right fs-9 mr-4"></i>Next</a>
+    {% endif %}
+</nav>

@@ -1,0 +1,31 @@
+{% extends 'pages/base.html' %} {% block content %} {% include 'blog/header.html' %}
+
+<main class="main-content">
+    <div class="section bg-gray">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-8 col-xl-9">
+                    <div class="row gap-y">
+                        {% include 'blog/posts.html' %}
+                    </div>
+                    {% include 'blog/pagination.html' %}
+                </div>
+
+                <!-- Side Bar-->
+                <div class="col-md-4 col-xl-3">
+                    <div class="sidebar px-4 py-md-0">
+                        {% include 'blog/search.html' %}
+                    </div>
+
+                    <hr> {% include 'blog/categories.html' %}
+                    <hr> {% include 'blog/top-posts.html' %}
+                    <hr>
+                    <hr> {% include 'blog/about.html' %}
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock content %}

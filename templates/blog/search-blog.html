@@ -1,0 +1,74 @@
+{% extends 'pages/base.html' %} {% block content %} 
+
+<header class="header text-center text-white" style="background-image: linear-gradient(-225deg, #5D9FFF 0%, #B8dCFF 48%, #6BBBFF 100%);">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <h1>Search: {{query}}</h1>
+                <p class="lead-2 opacity-90 mt-6">{{total}} Result(s) Found!</p>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="main-content">
+    <div class="section bg-gray">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-8 col-xl-9">
+                    <div class="row gap-y">
+                        {% include 'blog/posts.html' %}
+                    </div>
+                    <!--start pagination-->
+                    <div class="d-flex justify-content-center">
+                        <ul class="pagination">
+                            {% if posts.has_previous %}
+                            <li class="page-item"><a href="?search={{query}}&page={{posts.previous_page_number}}" class="page-link">Previous</a></li>
+                            {% else %}
+                            <li class="page-item disabled"><a href="#" class="page-link">Previous</a></li>
+                            {% endif %}
+
+                            {% if 4 in posts.paginator.page_range %}
+                                    {% if page|add:"-1" >= 1 %}
+                                <li class="page-item"><a href="?search={{query}}&page={{page|add:"-1"}}" class="page-link">{{page|add:"-1"}}</a></li>
+                                    {% endif %}
+                                    <li class="page-item"><a href="?search={{query}}&page={{page}}" class="page-link">{{page}}</a></li>
+                                    {% if page|add:"1" in posts.paginator.page_range %}
+                                    <li class="page-item"><a href="?search={{query}}&page={{page|add:"1"}}" class="page-link">{{page|add:"1"}}</a></li>
+                                    {% endif %}
+                            {% else %}
+                            {% for number in posts.paginator.page_range %}
+                            <li class="page-item"><a href="?search={{query}}&page={{number}}" class="page-link">{{number}}</a></li>
+                            {% endfor %}
+                            {% endif %}
+                            
+
+                            {% if posts.has_next %}
+                            <li class="page-item"><a href="?search={{query}}&page={{posts.next_page_number}}" class="page-link">Next</a></li>
+                            {% else %}
+                            <li class="page-item disabled"><a href="#" class="page-link">Next</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+
+
+                </div>
+
+                <!-- Side Bar-->
+                <div class="col-md-4 col-xl-3">
+                    <div class="sidebar px-4 py-md-0">
+                        {% include 'blog/search.html' %}
+                    </div>
+
+                    <hr> {% include 'blog/categories.html' %}
+                    <hr> {% include 'blog/top-posts.html' %}
+                    <hr>
+                    <hr> {% include 'blog/about.html' %}
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock content %}
